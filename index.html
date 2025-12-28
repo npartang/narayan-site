@@ -1,139 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Narayan Partangel – Technology Executive</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <title>Narayan Partangel – Technology Executive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-<style>
-  html {
-    scroll-behavior: smooth;
-  }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 60%, #000 100%);
+      color: #f8fafc;
+      line-height: 1.6;
+    }
 
-  body {
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: radial-gradient(circle at top, #111827 0, #020617 60%, #000 100%);
-    color: #f8fafc;
-    line-height: 1.6;
-  }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
 
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
+    header {
+      padding: 1.75rem 0 0.85rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(2, 6, 23, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #0f172a;
+      z-index: 10;
+    }
 
-  header {
-    padding: 1.75rem 0 0.85rem 0;
-    position: sticky;
-    top: 0;
-    background: rgba(2, 6, 23, 0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #0f172a;
-    z-index: 10;
-  }
+    .header-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
 
-  .header-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+    h1 {
+      font-size: 2.2rem;
+      margin: 0 0 0.25rem 0;
+      letter-spacing: 0.03em;
+    }
 
-  h1 {
-    font-size: 2.2rem;
-    margin: 0 0 0.25rem 0;
-    letter-spacing: 0.03em;
-  }
+    .subtitle {
+      color: #9ca3af;
+      font-size: 0.95rem;
+    }
 
-  .subtitle {
-    color: #9ca3af;
-    font-size: 0.95rem;
-  }
+    .tagline {
+      color: #cbd5f5;
+      font-size: 0.9rem;
+      max-width: 700px;
+      margin-top: 0.4rem;
+    }
 
-  .tagline {
-    color: #cbd5f5;
-    font-size: 0.9rem;
-    max-width: 700px;
-    margin-top: 0.4rem;
-  }
+    nav {
+      margin-top: 0.9rem;
+      text-align: left;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
 
-  nav {
-    margin-top: 0.9rem;
-    text-align: left;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
+    nav a {
+      color: #9ca3af;
+      text-decoration: none;
+      margin-right: 1.5rem;
+    }
 
-  nav a {
-    color: #9ca3af;
-    text-decoration: none;
-    margin-right: 1.5rem;
-  }
+    nav a:last-child {
+      margin-right: 0;
+    }
 
-  nav a:hover {
-    color: #e5e7eb;
-  }
+    nav a:hover {
+      color: #e5e7eb;
+    }
 
-  main {
-    padding: 2.5rem 0 4rem 0;
-  }
+    main {
+      padding: 2.5rem 0 4rem 0;
+    }
 
-  /* ✅ correct anchor stop position */
-  section {
-    scroll-margin-top: 55px;
-  }
+    /* Anchor offset so sticky header does not cover titles */
+    section.section {
+      padding-top: 80px;   /* space under header */
+      margin-top: -80px;   /* pull section back up for normal flow */
+      margin-bottom: 2.5rem;
+    }
 
-  .section {
-    margin-top: 2.5rem;
-  }
+    h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      border-bottom: 1px solid #1f2937;
+      padding-bottom: 0.4rem;
+    }
 
-  h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.5rem;
-    border-bottom: 1px solid #1f2937;
-    padding-bottom: 0.4rem;
-  }
+    .card {
+      background: #0f172a;
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+      border: 1px solid #1f2937;
+    }
 
-  .card {
-    background: #0f172a;
-    border-radius: 16px;
-    padding: 1.75rem;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.45);
-    border: 1px solid #1f2937;
-  }
+    .chat-accent {
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.25), 0 20px 50px rgba(0,0,0,0.6);
+    }
 
-  .chat-accent {
-    border: 1px solid #38bdf8;
-    box-shadow: 0 0 0 1px rgba(56,189,248,0.25), 0 20px 50px rgba(0,0,0,0.6);
-  }
+    .chat-frame {
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #020617;
+    }
 
-  .chat-frame {
-    width: 100%;
-    height: 600px;
-    border: none;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #020617;
-  }
+    .chat-loader {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid #38bdf8;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
 
-  footer {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    color: #6b7280;
-    border-top: 1px solid #111827;
-    font-size: 0.8rem;
-  }
-</style>
+    .chat-loader:hover {
+      background: #0b1220;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: #6b7280;
+      border-top: 1px solid #111827;
+      font-size: 0.8rem;
+    }
+
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        display: inline-block;
+        margin-right: 1rem;
+      }
+
+      .chat-frame {
+        height: 520px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
 <header>
   <div class="container header-inner">
-
     <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+      <!-- PHOTO -->
       <img
         src="headshot.jpg"
         alt="Narayan Partangel"
@@ -148,13 +193,12 @@
         onerror="this.src='https://via.placeholder.com/115x115.png?text=Photo';"
       >
 
+      <!-- TEXT -->
       <div>
         <h1>Narayan Partangel</h1>
-
         <div class="subtitle">
           Senior Technology Executive · Engineering Leadership · Digital Modernization &amp; GenAI
         </div>
-
         <p class="tagline">
           Building high-performing engineering organizations and modern platforms that scale with business growth.
         </p>
@@ -171,55 +215,60 @@
 
 <main>
   <div class="container">
-
     <section id="about" class="section">
       <div class="card">
         <h2>About me</h2>
-
         <p>
           I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering
           secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing
           Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and
-          modernization initiatives across acquisitions, servicing, customer communications, payments, and document
-          management. I focus on building strong leadership teams, modernizing legacy systems, and driving adoption of
-          GenAI to accelerate delivery and improve customer experiences.
+          multi-year digital modernization initiatives across acquisitions, servicing, customer communications,
+          payments, and document management, while unifying experiences into a single modern app platform. My work
+          focuses on modernizing legacy systems, building strong leadership teams and sustainable engineering culture,
+          and driving adoption of GenAI and agentic AI to accelerate delivery and improve customer experiences.
+          Previously, I led global engineering at ScienceLogic as Vice President of Engineering and have deep
+          experience across enterprise SaaS, AI/ML platforms, cloud infrastructure, and large-scale distributed
+          systems. I welcome opportunities to connect regarding senior technology leadership roles.
         </p>
-
+        <p>
+          This site includes a conversational assistant that can answer questions about my background, experience, and
+          work. Think of it as “chatting with Narayan” before we actually meet.
+        </p>
       </div>
     </section>
 
     <section id="chat" class="section">
       <div class="card chat-accent">
         <h2>Ask me anything</h2>
-
         <p style="color:#9ca3af; margin-bottom: 1rem;">
-          Ask about my background, leadership, modernization work, or perspectives on AI and engineering culture.
+          Ask about my experience, leadership approach, modernization work, or perspectives on engineering, AI, and
+          organizational transformation.
         </p>
 
-        <!-- IMPORTANT: prevent iframe from stealing scroll focus -->
-        <iframe
-          id="chatbot"
-          class="chat-frame"
-          src="https://npartangel-career-agent.hf.space"
-          title="Chat with Narayan"
-          tabindex="-1"
-        ></iframe>
+        <!-- Chat loads only when user clicks -->
+        <div id="chat-container">
+          <button id="load-chat" class="chat-loader" type="button">
+            💬 Open chat
+          </button>
+        </div>
       </div>
     </section>
 
     <section id="contact" class="section">
       <div class="card">
         <h2>Get in touch</h2>
-
+        <p>
+          If you’d like to talk about leadership roles, advisory work, or collaboration, feel free to connect with me
+          on LinkedIn or email me directly.
+        </p>
         <p>
           LinkedIn:
-          <a href="https://www.linkedin.com/in/partangel/" target="_blank">View profile</a><br>
+          <a href="https://www.linkedin.com/in/partangel/" target="_blank" rel="noopener">View profile</a><br />
           Email:
           <a href="mailto:npartangel@gmail.com">npartangel@gmail.com</a>
         </p>
       </div>
     </section>
-
   </div>
 </main>
 
@@ -230,16 +279,18 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // ✅ Force page to start at top
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  // Lazy-load chatbot so it doesn't affect initial scroll position
+  const loadButton = document.getElementById('load-chat');
+  const chatContainer = document.getElementById('chat-container');
 
-  window.addEventListener('load', function() {
-    window.scrollTo(0, 0);
-  });
-
-  // ✅ also stop iframe from dragging page down when it loads
-  document.getElementById("chatbot").addEventListener("load", function() {
-    window.scrollTo(0, 0);
+  loadButton.addEventListener('click', function () {
+    chatContainer.innerHTML = `
+      <iframe
+        class="chat-frame"
+        src="https://npartangel-career-agent.hf.space"
+        title="Chat with Narayan"
+      ></iframe>
+    `;
   });
 </script>
 
