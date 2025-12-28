@@ -79,11 +79,6 @@
       padding: 2.5rem 0 4rem 0;
     }
 
-    /* ✅ scroll fix: prevent sticky header from overscrolling */
-    section {
-      scroll-margin-top: 70px;
-    }
-
     .section {
       margin-top: 2.5rem;
     }
@@ -116,7 +111,7 @@
     }
 
     .chat-accent {
-      border: 1x solid #38bdf8;
+      border: 1px solid #38bdf8;
       box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.25), 0 20px 50px rgba(0, 0, 0, 0.6);
     }
 
@@ -167,8 +162,121 @@
   </style>
 </head>
 <body>
-  <!-- rest of your HTML remains the same -->
-  <!-- (unchanged body, sections, footer etc.) -->
+  <header>
+    <div class="container header-inner">
+
+      <!-- brand + photo row -->
+      <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+        
+        <!-- PHOTO PLACEHOLDER -->
+        <img
+          src="headshot.jpg"
+          alt="Narayan Partangel"
+          style="
+            width:115px;
+            height:115px;
+            border-radius:50%;
+            object-fit:cover;
+            border:2px solid #1f2937;
+            background:#020617;
+          "
+          onerror="this.src='https://via.placeholder.com/115x115.png?text=Photo';"
+        >
+
+        <!-- TEXT -->
+        <div>
+          <h1>Narayan Partangel</h1>
+
+          <div class="subtitle">
+            Senior Technology Executive · Engineering Leadership · Digital Modernization &amp; GenAI
+          </div>
+
+          <p class="tagline">
+            Building high-performing engineering organizations and modern platforms that scale with business growth.
+          </p>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about">About</a>
+        <a href="#chat">Chat</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- rest of your file remains unchanged -->
+
+  <main>
+    <div class="container">
+      <section class="section" id="about">
+        <div class="section-heading">About</div>
+        <div class="card">
+          <h2>About me</h2>
+          <p>
+            I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering
+            secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing
+            Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and
+            multi-year digital modernization initiatives across acquisitions, servicing, customer communications,
+            payments, and document management, while unifying experiences into a single modern app platform. My work
+            focuses on modernizing legacy systems, building strong leadership teams and sustainable engineering culture,
+            and driving adoption of GenAI and agentic AI to accelerate delivery and improve customer experiences.
+            Previously, I led global engineering at ScienceLogic as Vice President of Engineering and have deep
+            experience across enterprise SaaS, AI/ML platforms, cloud infrastructure, and large-scale distributed
+            systems. I welcome opportunities to connect regarding senior technology leadership roles.
+          </p>
+
+          <p>
+            This site includes a conversational assistant that can answer questions about my background, experience, and
+            work. Think of it as “chatting with Narayan” before we actually meet.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="chat">
+        <div class="section-heading">Conversation</div>
+        <div class="card chat-accent">
+          <h2>Ask me anything</h2>
+          <p style="color:#9ca3af; margin-bottom: 1rem;">
+            Ask about my experience, leadership approach, modernization work, or perspectives on engineering, AI, and
+            organizational transformation.
+          </p>
+          <iframe
+            class="chat-frame"
+            src="https://npartangel-career-agent.hf.space"
+            title="Chat with Narayan"
+          ></iframe>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-heading">Contact</div>
+        <div class="card">
+          <h2>Get in touch</h2>
+          <p>
+            If you’d like to talk about leadership roles, advisory work, or collaboration, feel free to connect with me
+            on LinkedIn or email me directly.
+          </p>
+          <p>
+            LinkedIn:
+            <a href="https://www.linkedin.com/in/partangel/" target="_blank" rel="noopener">
+              View profile
+            </a><br />
+            Email:
+            <a href="mailto:npartangel@gmail.com">npartangel@gmail.com</a>
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Narayan Partangel. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
 
