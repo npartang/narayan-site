@@ -164,15 +164,39 @@
 <body>
   <header>
     <div class="container header-inner">
-      <div>
-        <h1>Narayan Partangel</h1>
-        <div class="subtitle">
-          Senior Technology Executive · Engineering Leadership · Digital Modernization &amp; GenAI
+
+      <!-- brand + photo row -->
+      <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+        
+        <!-- PHOTO PLACEHOLDER -->
+        <img
+          src="headshot.jpg"
+          alt="Narayan Partangel"
+          style="
+            width:115px;
+            height:115px;
+            border-radius:50%;
+            object-fit:cover;
+            border:2px solid #1f2937;
+            background:#020617;
+          "
+          onerror="this.src='https://via.placeholder.com/115x115.png?text=Photo';"
+        >
+
+        <!-- TEXT -->
+        <div>
+          <h1>Narayan Partangel</h1>
+
+          <div class="subtitle">
+            Senior Technology Executive · Engineering Leadership · Digital Modernization &amp; GenAI
+          </div>
+
+          <p class="tagline">
+            Building high-performing engineering organizations and modern platforms that scale with business growth.
+          </p>
         </div>
-        <p class="tagline">
-          Building high-performing engineering organizations and modern platforms that scale with business growth.
-        </p>
       </div>
+
       <nav>
         <a href="#about">About</a>
         <a href="#chat">Chat</a>
@@ -180,6 +204,8 @@
       </nav>
     </div>
   </header>
+
+  <!-- rest of your file remains unchanged -->
 
   <main>
     <div class="container">
