@@ -7,8 +7,8 @@
   <style>
     html {
       scroll-behavior: smooth;
-      /* Web offset remains at your perfected 280px */
-      scroll-padding-top: 280px; 
+      /* Keeping your perfected scroll padding */
+      scroll-padding-top: 260px;
     }
 
     body {
@@ -59,6 +59,7 @@
       margin-top: 0.4rem;
     }
 
+    /* Profile Image Container */
     .profile-container {
       width: 115px;
       height: 115px;
@@ -78,10 +79,12 @@
       object-fit: cover;
     }
 
+    /* Fallback Initials Style */
     .profile-fallback {
       font-weight: bold;
       color: #38bdf8;
       font-size: 2rem;
+      text-transform: uppercase;
     }
 
     nav {
@@ -111,19 +114,19 @@
       margin-bottom: 4rem;
     }
 
+    h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      border-bottom: 1px solid #1f2937;
+      padding-bottom: 0.4rem;
+    }
+
     .card {
       background: #0f172a;
       border-radius: 16px;
       padding: 1.75rem;
       box-shadow: 0 18px 45px rgba(0,0,0,0.45);
       border: 1px solid #1f2937;
-    }
-
-    h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.5rem;
-      border-bottom: 1px solid #1f2937;
-      padding-bottom: 0.4rem;
     }
 
     .chat-accent {
@@ -136,6 +139,7 @@
       height: 600px;
       border: none;
       border-radius: 12px;
+      overflow: hidden;
       background: #020617;
     }
 
@@ -152,6 +156,10 @@
       cursor: pointer;
     }
 
+    .chat-loader:hover {
+      background: #0b1220;
+    }
+
     footer {
       text-align: center;
       padding: 3rem 1.5rem;
@@ -165,14 +173,16 @@
       text-decoration: none;
     }
 
+    a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 700px) {
-      html { 
-        /* Reduced from 180 to 120 to move content much higher up on mobile */
-        scroll-padding-top: 120px; 
+      html {
+        scroll-padding-top: 340px;
       }
       h1 { font-size: 1.8rem; }
       .chat-frame { height: 520px; }
-      .header-inner { align-items: flex-start; }
     }
   </style>
 </head>
@@ -181,14 +191,16 @@
 <header>
   <div class="container header-inner">
     <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+      
       <div class="profile-container" id="profile-box">
         <img
-          src="headshot.jpg"
+          src="./headshot.jpg"
           alt="Narayan Partangel"
           class="profile-img"
-          id="main-photo"
+          onerror="handleImageError(this)"
         >
       </div>
+
       <div>
         <h1>Narayan Partangel</h1>
         <div class="subtitle">Senior Technology Executive · Engineering Leadership · Digital Modernization &amp; GenAI</div>
@@ -208,17 +220,21 @@
     <section id="about" class="section">
       <div class="card">
         <h2>About me</h2>
-        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives.</p>
-        <p>This site includes a conversational assistant that can answer questions about my background, experience, and work.</p>
+        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives across acquisitions, servicing, customer communications, payments, and document management, while unifying experiences into a single modern app platform.</p>
+        <p>This site includes a conversational assistant that can answer questions about my background, experience, and work. Think of it as “chatting with Narayan” before we actually meet.</p>
       </div>
     </section>
 
     <section id="chat" class="section">
       <div class="card chat-accent">
         <h2>Ask me anything</h2>
-        <p style="color:#9ca3af; margin-bottom: 1rem;">Ask about my leadership approach, modernization work, or perspectives on engineering and AI.</p>
+        <p style="color:#9ca3af; margin-bottom: 1rem;">
+          Ask about my experience, leadership approach, modernization work, or perspectives on engineering, AI, and organizational transformation.
+        </p>
         <div id="chat-container">
-          <button id="load-chat" class="chat-loader" type="button">💬 Open chat</button>
+          <button id="load-chat" class="chat-loader" type="button">
+            💬 Open chat
+          </button>
         </div>
       </div>
     </section>
@@ -226,38 +242,44 @@
     <section id="contact" class="section">
       <div class="card">
         <h2>Get in touch</h2>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/partangel/" target="_blank" rel="noopener">View profile</a><br />
-           Email: <a href="mailto:npartangel@gmail.com">npartangel@gmail.com</a></p>
+        <p>If you’d like to talk about leadership roles, advisory work, or collaboration, feel free to connect with me on LinkedIn or email me directly.</p>
+        <p>
+          LinkedIn: <a href="https://www.linkedin.com/in/partangel/" target="_blank" rel="noopener">View profile</a><br />
+          Email: <a href="mailto:npartangel@gmail.com">npartangel@gmail.com</a>
+        </p>
       </div>
     </section>
   </div>
 </main>
 
-<footer>© <span id="year"></span> Narayan Partangel. All rights reserved.</footer>
+<footer>
+  © <span id="year"></span> Narayan Partangel. All rights reserved.
+</footer>
 
 <script>
+  // Update year
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  const imgElement = document.getElementById('main-photo');
-  const extensions = ['headshot.jpg', 'headshot.JPG', 'headshot.jpeg', 'headshot.png'];
-  let currentAttempt = 0;
+  // Image Fallback Handler
+  function handleImageError(image) {
+    const container = document.getElementById('profile-box');
+    image.style.display = 'none';
+    container.innerHTML = '<span class="profile-fallback">NP</span>';
+  }
 
-  imgElement.onerror = function() {
-    currentAttempt++;
-    if (currentAttempt < extensions.length) {
-      this.src = extensions[currentAttempt];
-    } else {
-      const container = document.getElementById('profile-box');
-      this.style.display = 'none';
-      container.innerHTML = '<span class="profile-fallback">NP</span>';
-    }
-  };
-
+  // Lazy-load chatbot
   const loadButton = document.getElementById('load-chat');
   const chatContainer = document.getElementById('chat-container');
+
   if (loadButton) {
     loadButton.addEventListener('click', function () {
-      chatContainer.innerHTML = `<iframe class="chat-frame" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
+      chatContainer.innerHTML = `
+        <iframe
+          class="chat-frame"
+          src="https://npartangel-career-agent.hf.space"
+          title="Chat with Narayan"
+        ></iframe>
+      `;
     });
   }
 </script>
