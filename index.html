@@ -7,6 +7,9 @@
   <style>
     html {
       scroll-behavior: smooth;
+      /* Adjust this value if you change the header height. 
+         It creates a 'buffer' for the sticky header. */
+      scroll-padding-top: 190px;
     }
 
     body {
@@ -83,10 +86,7 @@
       padding: 2.5rem 0 4rem 0;
     }
 
-    /* Anchor offset so sticky header does not cover titles */
     section.section {
-      padding-top: 30px;   /* space under header */
-      margin-top: -30px;   /* pull section back up for normal flow */
       margin-bottom: 2.5rem;
     }
 
@@ -154,6 +154,11 @@
     }
 
     @media (max-width: 700px) {
+      html {
+        /* Mobile header is taller, so we increase the scroll padding */
+        scroll-padding-top: 240px;
+      }
+
       .header-inner {
         align-items: flex-start;
       }
@@ -178,7 +183,6 @@
 <header>
   <div class="container header-inner">
     <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
-      <!-- PHOTO -->
       <img
         src="headshot.jpg"
         alt="Narayan Partangel"
@@ -193,7 +197,6 @@
         onerror="this.src='https://via.placeholder.com/115x115.png?text=Photo';"
       >
 
-      <!-- TEXT -->
       <div>
         <h1>Narayan Partangel</h1>
         <div class="subtitle">
@@ -241,59 +244,4 @@
       <div class="card chat-accent">
         <h2>Ask me anything</h2>
         <p style="color:#9ca3af; margin-bottom: 1rem;">
-          Ask about my experience, leadership approach, modernization work, or perspectives on engineering, AI, and
-          organizational transformation.
-        </p>
-
-        <!-- Chat loads only when user clicks -->
-        <div id="chat-container">
-          <button id="load-chat" class="chat-loader" type="button">
-            💬 Open chat
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="card">
-        <h2>Get in touch</h2>
-        <p>
-          If you’d like to talk about leadership roles, advisory work, or collaboration, feel free to connect with me
-          on LinkedIn or email me directly.
-        </p>
-        <p>
-          LinkedIn:
-          <a href="https://www.linkedin.com/in/partangel/" target="_blank" rel="noopener">View profile</a><br />
-          Email:
-          <a href="mailto:npartangel@gmail.com">npartangel@gmail.com</a>
-        </p>
-      </div>
-    </section>
-  </div>
-</main>
-
-<footer>
-  © <span id="year"></span> Narayan Partangel. All rights reserved.
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Lazy-load chatbot so it doesn't affect initial scroll position
-  const loadButton = document.getElementById('load-chat');
-  const chatContainer = document.getElementById('chat-container');
-
-  loadButton.addEventListener('click', function () {
-    chatContainer.innerHTML = `
-      <iframe
-        class="chat-frame"
-        src="https://npartangel-career-agent.hf.space"
-        title="Chat with Narayan"
-      ></iframe>
-    `;
-  });
-</script>
-
-</body>
-</html>
-
+          Ask about my experience, leadership
