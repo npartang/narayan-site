@@ -7,8 +7,8 @@
   <style>
     html {
       scroll-behavior: smooth;
-      /* Desktop offset */
-      scroll-padding-top: 240px; 
+      /* Increased desktop offset to push content further down/scroll "up" */
+      scroll-padding-top: 280px; 
     }
 
     body {
@@ -168,7 +168,7 @@
     @media (max-width: 700px) {
       html { 
         /* Increased mobile offset significantly to clear tall mobile header */
-        scroll-padding-top: 360px; 
+        scroll-padding-top: 380px; 
       }
       h1 { font-size: 1.8rem; }
       .chat-frame { height: 520px; }
@@ -238,6 +238,7 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  // Handle headshot loading with multiple fallbacks
   const imgElement = document.getElementById('main-photo');
   const extensions = ['headshot.jpg', 'headshot.JPG', 'headshot.jpeg', 'headshot.png'];
   let currentAttempt = 0;
@@ -253,6 +254,7 @@
     }
   };
 
+  // Lazy-load chatbot
   const loadButton = document.getElementById('load-chat');
   const chatContainer = document.getElementById('chat-container');
   if (loadButton) {
