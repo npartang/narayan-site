@@ -7,7 +7,7 @@
   <style>
     html {
       scroll-behavior: smooth;
-      /* Increased to 260px to push content significantly further down the screen */
+      /* Keeping your perfected scroll padding */
       scroll-padding-top: 260px;
     }
 
@@ -57,6 +57,34 @@
       font-size: 0.9rem;
       max-width: 700px;
       margin-top: 0.4rem;
+    }
+
+    /* Profile Image Container */
+    .profile-container {
+      width: 115px;
+      height: 115px;
+      border-radius: 50%;
+      border: 2px solid #1f2937;
+      background: #1e293b;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Fallback Initials Style */
+    .profile-fallback {
+      font-weight: bold;
+      color: #38bdf8;
+      font-size: 2rem;
+      text-transform: uppercase;
     }
 
     nav {
@@ -151,7 +179,7 @@
 
     @media (max-width: 700px) {
       html {
-        scroll-padding-top: 340px; /* Even more padding for tall mobile headers */
+        scroll-padding-top: 340px;
       }
       h1 { font-size: 1.8rem; }
       .chat-frame { height: 520px; }
@@ -163,12 +191,16 @@
 <header>
   <div class="container header-inner">
     <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
-      <img
-        src="headshot.jpg"
-        alt="Narayan Partangel"
-        style="width:115px; height:115px; border-radius:50%; object-fit:cover; border:2px solid #1f2937; background:#020617;"
-        onerror="this.src='https://via.placeholder.com/115x115.png?text=Photo';"
-      >
+      
+      <div class="profile-container" id="profile-box">
+        <img
+          src="./headshot.jpg"
+          alt="Narayan Partangel"
+          class="profile-img"
+          onerror="handleImageError(this)"
+        >
+      </div>
+
       <div>
         <h1>Narayan Partangel</h1>
         <div class="subtitle">Senior Technology Executive · Engineering Leadership · Digital Modernization &amp; GenAI</div>
@@ -188,7 +220,7 @@
     <section id="about" class="section">
       <div class="card">
         <h2>About me</h2>
-        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives across acquisitions, servicing, customer communications, payments, and document management, while unifying experiences into a single modern app platform. My work focuses on modernizing legacy systems, building strong leadership teams and sustainable engineering culture, and driving adoption of GenAI and agentic AI to accelerate delivery and improve customer experiences.</p>
+        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives across acquisitions, servicing, customer communications, payments, and document management, while unifying experiences into a single modern app platform.</p>
         <p>This site includes a conversational assistant that can answer questions about my background, experience, and work. Think of it as “chatting with Narayan” before we actually meet.</p>
       </div>
     </section>
@@ -225,20 +257,31 @@
 </footer>
 
 <script>
+  // Update year
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  // Image Fallback Handler
+  function handleImageError(image) {
+    const container = document.getElementById('profile-box');
+    image.style.display = 'none';
+    container.innerHTML = '<span class="profile-fallback">NP</span>';
+  }
+
+  // Lazy-load chatbot
   const loadButton = document.getElementById('load-chat');
   const chatContainer = document.getElementById('chat-container');
 
-  loadButton.addEventListener('click', function () {
-    chatContainer.innerHTML = `
-      <iframe
-        class="chat-frame"
-        src="https://npartangel-career-agent.hf.space"
-        title="Chat with Narayan"
-      ></iframe>
-    `;
-  });
+  if (loadButton) {
+    loadButton.addEventListener('click', function () {
+      chatContainer.innerHTML = `
+        <iframe
+          class="chat-frame"
+          src="https://npartangel-career-agent.hf.space"
+          title="Chat with Narayan"
+        ></iframe>
+      `;
+    });
+  }
 </script>
 
 </body>
