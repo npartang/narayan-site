@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Narayan Partangel – Technology Executive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <style>
     html {
       scroll-behavior: smooth;
@@ -126,7 +126,7 @@
       border: 1px solid #1f2937;
     }
 
-    /* FLOATING CHAT BUBBLE */
+    /* FLOATING BUBBLE */
     .chat-bubble {
       position: fixed;
       bottom: 25px;
@@ -141,28 +141,21 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
       cursor: pointer;
       z-index: 999;
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease;
     }
 
-    .chat-bubble:hover {
-      transform: scale(1.1);
-      background: #0ea5e9;
-    }
+    .chat-bubble svg { width: 30px; height: 30px; fill: white; }
 
-    .chat-bubble svg {
-      width: 30px;
-      height: 30px;
-      fill: white;
-    }
-
-    /* FULL-SCREEN MODAL */
+    /* FULL-SCREEN MODAL - FIXED FOR iOS */
     #chat-modal {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
+      width: 100%;
+      /* Use dvh to account for iOS Safari UI bars */
       height: 100vh;
+      height: 100dvh; 
       background: #020617;
       z-index: 2000;
       flex-direction: column;
@@ -186,7 +179,6 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 0.9rem;
-      font-weight: 600;
     }
 
     #chat-frame-container {
@@ -194,6 +186,8 @@
       width: 100%;
       height: 100%;
       position: relative;
+      /* Add small bottom padding for iOS home indicator */
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
     .chat-frame-full {
@@ -235,7 +229,6 @@
     @media (max-width: 700px) {
       html { scroll-padding-top: 440px; }
       h1 { font-size: 1.8rem; }
-      .chat-bubble { bottom: 20px; right: 20px; width: 55px; height: 55px; }
     }
   </style>
 </head>
