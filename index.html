@@ -7,7 +7,6 @@
   <style>
     html {
       scroll-behavior: smooth;
-      /* Keeping your perfected desktop scroll padding */
       scroll-padding-top: 260px;
     }
 
@@ -127,22 +126,42 @@
       border: 1px solid #1f2937;
     }
 
-    .chat-accent {
-      border: 1px solid #38bdf8;
-      box-shadow: 0 0 0 1px rgba(56,189,248,0.25), 0 20px 50px rgba(0,0,0,0.6);
+    /* CHAT MODAL STYLES */
+    #chat-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 23, 0.98);
+      z-index: 1000;
+      flex-direction: column;
     }
 
-    .chat-frame {
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .close-chat {
+      background: #1e293b;
+      border: 1px solid #38bdf8;
+      color: #f8fafc;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .chat-frame-full {
+      flex: 1;
       width: 100%;
-      /* Height-optimized: use viewport height (vh) for better real estate coverage */
-      height: 75vh; 
-      min-height: 500px;
-      max-height: 800px;
       border: none;
-      border-radius: 12px;
-      overflow: hidden;
       background: #020617;
-      display: block;
     }
 
     .chat-loader {
@@ -173,12 +192,9 @@
 
     @media (max-width: 700px) {
       html {
-        /* Significantly increased to move the content "up" to meet the mobile header */
         scroll-padding-top: 440px;
       }
       h1 { font-size: 1.8rem; }
-      /* Adjust mobile chat height specifically if needed */
-      .chat-frame { height: 70vh; }
     }
   </style>
 </head>
@@ -188,12 +204,7 @@
   <div class="container header-inner">
     <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
       <div class="profile-container" id="profile-box">
-        <img
-          src="./headshot.jpg"
-          alt="Narayan Partangel"
-          class="profile-img"
-          onerror="handleImageError(this)"
-        >
+        <img src="./headshot.jpg" alt="Narayan Partangel" class="profile-img" onerror="handleImageError(this)">
       </div>
       <div>
         <h1>Narayan Partangel</h1>
@@ -215,17 +226,14 @@
       <div class="card">
         <h2>About me</h2>
         <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives.</p>
-        <p>This site includes a conversational assistant that can answer questions about my background, experience, and work.</p>
       </div>
     </section>
 
     <section id="chat" class="section">
-      <div class="card chat-accent">
-        <h2>Ask me anything</h2>
-        <p style="color:#9ca3af; margin-bottom: 1rem;">Ask about my leadership approach, modernization work, or perspectives on engineering and AI.</p>
-        <div id="chat-container">
-          <button id="load-chat" class="chat-loader" type="button">💬 Open chat</button>
-        </div>
+      <div class="card" style="border: 1px solid #38bdf8;">
+        <h2>Career Assistant</h2>
+        <p style="color:#9ca3af; margin-bottom: 1.5rem;">Launch a dedicated chat session to ask questions about my work history, technical expertise, or leadership philosophy.</p>
+        <button id="open-chat-btn" class="chat-loader">💬 Launch Assistant</button>
       </div>
     </section>
 
@@ -238,6 +246,15 @@
     </section>
   </div>
 </main>
+
+<div id="chat-modal">
+  <div class="modal-header">
+    <span style="font-weight: bold; color: #38bdf8;">Narayan's AI Assistant</span>
+    <button class="close-chat" id="close-chat-btn">Close Chat</button>
+  </div>
+  <div id="chat-frame-container" style="height: 100%; width: 100%;">
+    </div>
+</div>
 
 <footer>
   © <span id="year"></span> Narayan Partangel. All rights reserved.
@@ -252,21 +269,25 @@
     container.innerHTML = '<span class="profile-fallback">NP</span>';
   }
 
-  const loadButton = document.getElementById('load-chat');
-  const chatContainer = document.getElementById('chat-container');
+  const modal = document.getElementById('chat-modal');
+  const openBtn = document.getElementById('open-chat-btn');
+  const closeBtn = document.getElementById('close-chat-btn');
+  const frameContainer = document.getElementById('chat-frame-container');
 
-  if (loadButton) {
-    loadButton.addEventListener('click', function () {
-      // Load the iframe
-      chatContainer.innerHTML = `<iframe class="chat-frame" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
-      
-      // Smoothly scroll the chat card into view so the user doesn't miss the start of the chat
-      setTimeout(() => {
-        const chatSection = document.getElementById('chat');
-        chatSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 150);
-    });
-  }
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    
+    // Inject iframe only when opened to save resources
+    if (!frameContainer.innerHTML.trim()) {
+      frameContainer.innerHTML = `<iframe class="chat-frame-full" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable background scrolling
+  });
 </script>
 
 </body>
