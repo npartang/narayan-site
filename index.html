@@ -134,11 +134,15 @@
 
     .chat-frame {
       width: 100%;
-      height: 600px;
+      /* Height-optimized: use viewport height (vh) for better real estate coverage */
+      height: 75vh; 
+      min-height: 500px;
+      max-height: 800px;
       border: none;
       border-radius: 12px;
       overflow: hidden;
       background: #020617;
+      display: block;
     }
 
     .chat-loader {
@@ -173,7 +177,8 @@
         scroll-padding-top: 440px;
       }
       h1 { font-size: 1.8rem; }
-      .chat-frame { height: 520px; }
+      /* Adjust mobile chat height specifically if needed */
+      .chat-frame { height: 70vh; }
     }
   </style>
 </head>
@@ -252,7 +257,14 @@
 
   if (loadButton) {
     loadButton.addEventListener('click', function () {
+      // Load the iframe
       chatContainer.innerHTML = `<iframe class="chat-frame" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
+      
+      // Smoothly scroll the chat card into view so the user doesn't miss the start of the chat
+      setTimeout(() => {
+        const chatSection = document.getElementById('chat');
+        chatSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
     });
   }
 </script>
