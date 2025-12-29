@@ -132,10 +132,10 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(2, 6, 23, 0.98);
-      z-index: 1000;
+      width: 100vw;
+      height: 100vh;
+      background: #020617;
+      z-index: 2000;
       flex-direction: column;
     }
 
@@ -145,21 +145,35 @@
       align-items: center;
       padding: 1rem 1.5rem;
       border-bottom: 1px solid #1f2937;
+      background: #0f172a;
+      flex-shrink: 0; /* Ensures header doesn't shrink */
     }
 
     .close-chat {
       background: #1e293b;
       border: 1px solid #38bdf8;
       color: #f8fafc;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 8px;
       cursor: pointer;
       font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Container for the iframe takes all remaining space */
+    #chat-frame-container {
+      flex-grow: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
     }
 
     .chat-frame-full {
-      flex: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
       border: none;
       background: #020617;
     }
@@ -183,11 +197,6 @@
       color: #6b7280;
       border-top: 1px solid #111827;
       font-size: 0.8rem;
-    }
-
-    a {
-      color: #38bdf8;
-      text-decoration: none;
     }
 
     @media (max-width: 700px) {
@@ -225,7 +234,7 @@
     <section id="about" class="section">
       <div class="card">
         <h2>About me</h2>
-        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives.</p>
+        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes.</p>
       </div>
     </section>
 
@@ -249,10 +258,10 @@
 
 <div id="chat-modal">
   <div class="modal-header">
-    <span style="font-weight: bold; color: #38bdf8;">Narayan's AI Assistant</span>
+    <span style="font-weight: bold; color: #38bdf8;">Career Assistant</span>
     <button class="close-chat" id="close-chat-btn">Close Chat</button>
   </div>
-  <div id="chat-frame-container" style="height: 100%; width: 100%;">
+  <div id="chat-frame-container">
     </div>
 </div>
 
@@ -276,9 +285,8 @@
 
   openBtn.addEventListener('click', () => {
     modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden'; // Stop background scroll
     
-    // Inject iframe only when opened to save resources
     if (!frameContainer.innerHTML.trim()) {
       frameContainer.innerHTML = `<iframe class="chat-frame-full" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
     }
@@ -286,7 +294,7 @@
 
   closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable background scrolling
+    document.body.style.overflow = 'auto'; // Re-enable background scroll
   });
 </script>
 
