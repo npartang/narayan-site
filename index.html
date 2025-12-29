@@ -7,7 +7,6 @@
   <style>
     html {
       scroll-behavior: smooth;
-      /* Your perfected desktop offset */
       scroll-padding-top: 260px;
     }
 
@@ -127,7 +126,36 @@
       border: 1px solid #1f2937;
     }
 
-    /* CHAT MODAL STYLES */
+    /* FLOATING CHAT BUBBLE */
+    .chat-bubble {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: #38bdf8;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      cursor: pointer;
+      z-index: 999;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .chat-bubble:hover {
+      transform: scale(1.1);
+      background: #0ea5e9;
+    }
+
+    .chat-bubble svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+    }
+
+    /* FULL-SCREEN MODAL */
     #chat-modal {
       display: none;
       position: fixed;
@@ -205,26 +233,23 @@
     }
 
     @media (max-width: 700px) {
-      html {
-        /* Your perfected mobile offset */
-        scroll-padding-top: 440px;
-      }
+      html { scroll-padding-top: 440px; }
       h1 { font-size: 1.8rem; }
+      .chat-bubble { bottom: 20px; right: 20px; width: 55px; height: 55px; }
     }
   </style>
 </head>
 <body>
 
+<div class="chat-bubble" id="fab-chat" title="Chat with Narayan's AI">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+</div>
+
 <header>
   <div class="container header-inner">
     <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
       <div class="profile-container" id="profile-box">
-        <img
-          src="./headshot.jpg"
-          alt="Narayan Partangel"
-          class="profile-img"
-          onerror="handleImageError(this)"
-        >
+        <img src="./headshot.jpg" alt="Narayan Partangel" class="profile-img" onerror="handleImageError(this)">
       </div>
       <div>
         <h1>Narayan Partangel</h1>
@@ -273,13 +298,10 @@
     <span style="font-weight: bold; color: #38bdf8;">Career Assistant</span>
     <button class="close-chat" id="close-chat-btn">Close Chat</button>
   </div>
-  <div id="chat-frame-container">
-    </div>
+  <div id="chat-frame-container"></div>
 </div>
 
-<footer>
-  © <span id="year"></span> Narayan Partangel. All rights reserved.
-</footer>
+<footer>© <span id="year"></span> Narayan Partangel. All rights reserved.</footer>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
@@ -292,21 +314,24 @@
 
   const modal = document.getElementById('chat-modal');
   const openBtn = document.getElementById('open-chat-btn');
+  const fabBtn = document.getElementById('fab-chat');
   const closeBtn = document.getElementById('close-chat-btn');
   const frameContainer = document.getElementById('chat-frame-container');
 
-  openBtn.addEventListener('click', () => {
+  function openChat() {
     modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Stop background scroll
-    
+    document.body.style.overflow = 'hidden'; 
     if (!frameContainer.innerHTML.trim()) {
       frameContainer.innerHTML = `<iframe class="chat-frame-full" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
     }
-  });
+  }
+
+  openBtn.addEventListener('click', openChat);
+  fabBtn.addEventListener('click', openChat);
 
   closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable background scroll
+    document.body.style.overflow = 'auto'; 
   });
 </script>
 
