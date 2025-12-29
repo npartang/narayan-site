@@ -7,6 +7,7 @@
   <style>
     html {
       scroll-behavior: smooth;
+      /* Keeping your perfected desktop scroll padding */
       scroll-padding-top: 260px;
     }
 
@@ -126,7 +127,7 @@
       border: 1px solid #1f2937;
     }
 
-    /* CHAT MODAL STYLES */
+    /* FULL-SCREEN CHAT OVERLAY STYLES */
     #chat-modal {
       display: none;
       position: fixed;
@@ -146,7 +147,7 @@
       padding: 1rem 1.5rem;
       border-bottom: 1px solid #1f2937;
       background: #0f172a;
-      flex-shrink: 0; /* Ensures header doesn't shrink */
+      flex-shrink: 0;
     }
 
     .close-chat {
@@ -160,7 +161,6 @@
       font-weight: 600;
     }
 
-    /* Container for the iframe takes all remaining space */
     #chat-frame-container {
       flex-grow: 1;
       width: 100%;
@@ -201,6 +201,7 @@
 
     @media (max-width: 700px) {
       html {
+        /* Keeping your mobile-specific scroll padding */
         scroll-padding-top: 440px;
       }
       h1 { font-size: 1.8rem; }
@@ -213,7 +214,12 @@
   <div class="container header-inner">
     <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
       <div class="profile-container" id="profile-box">
-        <img src="./headshot.jpg" alt="Narayan Partangel" class="profile-img" onerror="handleImageError(this)">
+        <img
+          src="./headshot.jpg"
+          alt="Narayan Partangel"
+          class="profile-img"
+          onerror="handleImageError(this)"
+        >
       </div>
       <div>
         <h1>Narayan Partangel</h1>
@@ -234,69 +240,5 @@
     <section id="about" class="section">
       <div class="card">
         <h2>About me</h2>
-        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes.</p>
-      </div>
-    </section>
-
-    <section id="chat" class="section">
-      <div class="card" style="border: 1px solid #38bdf8;">
-        <h2>Career Assistant</h2>
-        <p style="color:#9ca3af; margin-bottom: 1.5rem;">Launch a dedicated chat session to ask questions about my work history, technical expertise, or leadership philosophy.</p>
-        <button id="open-chat-btn" class="chat-loader">💬 Launch Assistant</button>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="card">
-        <h2>Get in touch</h2>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/partangel/" target="_blank" rel="noopener">View profile</a><br />
-           Email: <a href="mailto:npartangel@gmail.com">npartangel@gmail.com</a></p>
-      </div>
-    </section>
-  </div>
-</main>
-
-<div id="chat-modal">
-  <div class="modal-header">
-    <span style="font-weight: bold; color: #38bdf8;">Career Assistant</span>
-    <button class="close-chat" id="close-chat-btn">Close Chat</button>
-  </div>
-  <div id="chat-frame-container">
-    </div>
-</div>
-
-<footer>
-  © <span id="year"></span> Narayan Partangel. All rights reserved.
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  function handleImageError(image) {
-    const container = document.getElementById('profile-box');
-    image.style.display = 'none';
-    container.innerHTML = '<span class="profile-fallback">NP</span>';
-  }
-
-  const modal = document.getElementById('chat-modal');
-  const openBtn = document.getElementById('open-chat-btn');
-  const closeBtn = document.getElementById('close-chat-btn');
-  const frameContainer = document.getElementById('chat-frame-container');
-
-  openBtn.addEventListener('click', () => {
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Stop background scroll
-    
-    if (!frameContainer.innerHTML.trim()) {
-      frameContainer.innerHTML = `<iframe class="chat-frame-full" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
-    }
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable background scroll
-  });
-</script>
-
-</body>
-</html>
+        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives.</p>
+        <p>This site includes a conversational assistant that can answer questions about my background, experience, and work
