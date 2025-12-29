@@ -7,7 +7,7 @@
   <style>
     html {
       scroll-behavior: smooth;
-      /* Perfected desktop scroll padding */
+      /* Your perfected desktop offset */
       scroll-padding-top: 260px;
     }
 
@@ -127,7 +127,7 @@
       border: 1px solid #1f2937;
     }
 
-    /* FULL-SCREEN MODAL STYLES */
+    /* CHAT MODAL STYLES */
     #chat-modal {
       display: none;
       position: fixed;
@@ -206,7 +206,7 @@
 
     @media (max-width: 700px) {
       html {
-        /* Mobile-specific scroll padding */
+        /* Your perfected mobile offset */
         scroll-padding-top: 440px;
       }
       h1 { font-size: 1.8rem; }
@@ -245,4 +245,70 @@
     <section id="about" class="section">
       <div class="card">
         <h2>About me</h2>
-        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide
+        <p>I am a dynamic technology executive with a proven record of scaling global engineering teams and delivering secure, high-performance platforms that transform business outcomes. I currently serve as Senior Managing Director of Software Engineering at OneMain Financial, leading enterprise-wide software delivery and multi-year digital modernization initiatives.</p>
+        <p>This site includes a conversational assistant that can answer questions about my background, experience, and work.</p>
+      </div>
+    </section>
+
+    <section id="chat" class="section">
+      <div class="card" style="border: 1px solid #38bdf8;">
+        <h2>Career Assistant</h2>
+        <p style="color:#9ca3af; margin-bottom: 1.5rem;">Launch a dedicated full-screen chat session to ask questions about my work history, technical expertise, or leadership philosophy.</p>
+        <button id="open-chat-btn" class="chat-loader">💬 Launch Assistant</button>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="card">
+        <h2>Get in touch</h2>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/partangel/" target="_blank" rel="noopener">View profile</a><br />
+           Email: <a href="mailto:npartangel@gmail.com">npartangel@gmail.com</a></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="chat-modal">
+  <div class="modal-header">
+    <span style="font-weight: bold; color: #38bdf8;">Career Assistant</span>
+    <button class="close-chat" id="close-chat-btn">Close Chat</button>
+  </div>
+  <div id="chat-frame-container">
+    </div>
+</div>
+
+<footer>
+  © <span id="year"></span> Narayan Partangel. All rights reserved.
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function handleImageError(image) {
+    const container = document.getElementById('profile-box');
+    image.style.display = 'none';
+    container.innerHTML = '<span class="profile-fallback">NP</span>';
+  }
+
+  const modal = document.getElementById('chat-modal');
+  const openBtn = document.getElementById('open-chat-btn');
+  const closeBtn = document.getElementById('close-chat-btn');
+  const frameContainer = document.getElementById('chat-frame-container');
+
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Stop background scroll
+    
+    if (!frameContainer.innerHTML.trim()) {
+      frameContainer.innerHTML = `<iframe class="chat-frame-full" src="https://npartangel-career-agent.hf.space" title="Chat with Narayan"></iframe>`;
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable background scroll
+  });
+</script>
+
+</body>
+</html>
